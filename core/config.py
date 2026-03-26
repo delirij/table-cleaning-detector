@@ -3,17 +3,15 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     
 
-    CONFIDENCE: float = 0.5
-    BUFFER_FRAMES: int = 30
+    CONFIDENCE: float = 0.5 # порог уверенности нейросети
+    BUFFER_FRAMES: int = 30 # задержка для защиты от моргания
 
+    YOLO_MODEL_PATH: str = "yolov8n.pt" # Путь к весам модели по умолчанию
 
-    YOLO_MODEL_PATH: str = "yolov8n.pt"
-
-
-    COLOR_EMPTY: tuple[int, int, int] = (0, 255, 0)
-    COLOR_OCCUPIED: tuple[int, int, int] = (0, 0, 255)
-    BOX_THICKNESS: int = 2
-
+    COLOR_EMPTY: tuple[int, int, int] = (0, 255, 0) # Цвет для пустого стола
+    COLOR_OCCUPIED: tuple[int, int, int] = (0, 0, 255) # Цвет для занятого стола
+    BOX_THICKNESS: int = 2 # Толщина линий
+    
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",
