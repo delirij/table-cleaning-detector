@@ -1,0 +1,15 @@
+# Среды
+.venv
+.env
+
+# Кэш Python
+__pycache__/
+*.py[cod]
+
+# Видеофайлы 
+*.mp4
+*.avi
+
+# Настройки IDE
+.vscode/
+.idea/
