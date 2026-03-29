@@ -3,7 +3,7 @@ from typing import List, Tuple
 
 from ultralytics import YOLO
 
-from core.config import settigns # Настройки
+from core.config import settings
 
 logger = logging.getLogger(__name__)
 
@@ -13,7 +13,7 @@ BoundigBox = Tuple[int, int, int, int]
 class PersonDetector:
     def __init__(self):
         # Загружаем модель
-        self.model: YOLO = YOLO(f"{settigns.YOLO_MODEL_PATH}")
+        self.model: YOLO = YOLO(f"{settings.YOLO_MODEL_PATH}")
 
 
     def get_people_boxes(self, frame) -> List[BoundigBox]:
@@ -22,7 +22,7 @@ class PersonDetector:
         results = self.model.predict(
             source=frame,
             classes = [0], # Ищем только людей
-            conf = settigns.CONFIDENCE,
+            conf = settings.CONFIDENCE,
             verbose = False # Отключаем спам в консоль
         )
 

@@ -13,3 +13,5 @@ __pycache__/
 # Настройки IDE
 .vscode/
 .idea/
+
+yolov8s.pt
