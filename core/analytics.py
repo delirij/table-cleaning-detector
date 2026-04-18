@@ -18,8 +18,9 @@ def calculate_average_turnover_time(df: pd.DataFrame) -> Optional[float]:
     """
 
     # Защита от пустоты
-    if df in None or df.empty:
+    if df is None or df.empty:
         logger.warning("DataFrame пуст, нет данных для расчета")
+        return None
 
     delays = []
     last_empty_time = None

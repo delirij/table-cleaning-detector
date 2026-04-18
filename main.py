@@ -54,7 +54,7 @@ def main():
 
     logger.info("Инициализация нейросети и модуля трекинга...")
     detector = PersonDetector()
-    tracker = TableTracker(buffer_frame=settings.BUFFER_FRAMES)
+    tracker = TableTracker()
 
     cap = cv2.VideoCapture(str(video_path))
     if not cap.isOpened():
@@ -87,7 +87,7 @@ def main():
             if not ret:
                 break
 
-            current_time_sec = frame_count / fps
+            current_time_sec = cap.get(cv2.CAP_PROP_POS_MSEC) / 1000.0
 
             people_boxes = detector.get_people_boxes(frame)
             tracker.update(people_boxes, table_box, current_time_sec)

@@ -4,9 +4,11 @@ class Settings(BaseSettings):
     
 
     CONFIDENCE: float = 0.2 # порог уверенности нейросети
-    BUFFER_FRAMES: int = 5 # задержка для защиты от моргания
+    BUFFER_APPROACH: int = 10 # Ждем кадров (~0.4 сек), чтобы занять стол
+    BUFFER_EMPTY: int = 150 # Ждем кадров (~6 сек) БЕЗ людей, чтобы освободить стол
 
-    YOLO_MODEL_PATH: str = "yolov8s.pt" # Путь к весам модели по умолчанию
+    YOLO_MODEL_PATH: str = "models/yolov8s.pt" # Путь к весам модели по умолчанию
+    DETECT_CLASSES: list[int] = [0] # Ищем только людей
 
     COLOR_EMPTY: tuple[int, int, int] = (0, 255, 0) # Цвет для пустого стола
     COLOR_OCCUPIED: tuple[int, int, int] = (0, 0, 255) # Цвет для занятого стола

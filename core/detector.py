@@ -1,5 +1,5 @@
 import logging
-from typing import List, Tuple
+from typing import List
 
 from ultralytics import YOLO
 
@@ -7,8 +7,7 @@ from core.config import settings
 
 logger = logging.getLogger(__name__)
 
-# Удобный тип данных для координат
-BoundigBox = Tuple[int, int, int, int]
+from core.types import BoundingBox
 
 class PersonDetector:
     def __init__(self):
@@ -16,17 +15,17 @@ class PersonDetector:
         self.model: YOLO = YOLO(f"{settings.YOLO_MODEL_PATH}")
 
 
-    def get_people_boxes(self, frame) -> List[BoundigBox]:
+    def get_people_boxes(self, frame) -> List[BoundingBox]:
 
         # Передаем один кадр
         results = self.model.predict(
             source=frame,
-            classes = [0], # Ищем только людей
+            classes = settings.DETECT_CLASSES,
             conf = settings.CONFIDENCE,
             verbose = False # Отключаем спам в консоль
         )
 
-        people_boxes: List[BoundigBox] = []
+        people_boxes: List[BoundingBox] = []
 
         # Достаем координаты
         for result in results:
